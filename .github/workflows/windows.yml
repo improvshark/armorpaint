@@ -15,5 +15,7 @@ jobs:
       run: node Kromx/make.js -g direct3d11
     - name: Cd
       run: cd Kromx 
+    - name: Get Submodules
+      run: git submodule update --init --recursive
     - name: Compile kinc
       run: node Kinc/make -g direct3d11
