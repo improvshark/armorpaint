@@ -1,0 +1,30 @@
+name: windows
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: install 7zip
+      run : choco install 7zip
+    - name: Get Submodules
+      run: git submodule update --init --recursive
+    - name: build
+      run: |
+        node Kromx/make.js -g direct3d11
+        cd Kromx
+        7z.exe e .\v8\libraries\win32\release\v8_monolith.7z -o".\v8\libraries\win32\release\"
+        node Kinc/make.js -g direct3d11 --compile
+    - name: where are we?
+      run: |
+        mkdir dist
+        cp -r build/krom/* dist/
+        cp Kromx/Deployment/* dist/
+    - uses: actions/upload-artifact@v1
+      with:
+        name: my-artifact
+        path: dist
