@@ -9,11 +9,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: install 7zip
+      run : choco install 7zip
     - name: Get Submodules
       run: git submodule update --init --recursive
     - name: Compile kromx
       run: node Kromx/make.js -g direct3d11
     - name: Cd
-      run: cd Kromx 
+      run: cd Kromx
+    - name: unpack
+      run: 7z.exe e .\v8\libraries\win32\release\v8_monolith.7z -o'.\v8\libraries\win32\release\'
     - name: Compile kinc
-      run: node Kinc/make -g direct3d11 --compile
+      run: node Kinc/make.js -g direct3d11 --compile
