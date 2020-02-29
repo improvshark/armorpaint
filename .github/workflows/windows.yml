@@ -14,8 +14,8 @@ jobs:
     - name: Get Submodules
       run: git submodule update --init --recursive
     - name: build
-      run:|
+      run: |
         node Kromx/make.js -g direct3d11
         cd Kromx
-        7z.exe e .\v8\libraries\win32\release\v8_monolith.7z -o'.\v8\libraries\win32\release\'
+        7z.exe e .\v8\libraries\win32\release\v8_monolith.7z -o".\v8\libraries\win32\release\"
         node Kinc/make.js -g direct3d11 --compile
