@@ -11,11 +11,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Get Submodules
       run: git submodule update --init --recursive
-    - name: Get Submodules hack
-      run: git submodule foreach --recursive git pull origin master
     - name: Compile kromx
       run: node Kromx/make.js -g direct3d11
     - name: Cd
       run: cd Kromx 
     - name: Compile kinc
-      run: node Kinc/make -g direct3d11
+      run: node Kinc/make -g direct3d11 --compile
