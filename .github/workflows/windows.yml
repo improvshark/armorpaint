@@ -19,8 +19,11 @@ jobs:
         cd Kromx
         7z.exe e .\v8\libraries\win32\release\v8_monolith.7z -o".\v8\libraries\win32\release\"
         node Kinc/make.js -g direct3d11 --compile
-
+    - name: where are we?
+      run: |
+        ls
+        echo %cd%
     - uses: actions/upload-artifact@v1
       with:
         name: my-artifact
-        path: /
+        path: armorpaint
